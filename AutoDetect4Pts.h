@@ -1,0 +1,35 @@
+// AutoDetect4Pts.h: interface for the CAutoDetect4Pts class.
+//
+//////////////////////////////////////////////////////////////////////
+
+#if !defined __AUTODETECT4PTS_H__
+#define __AUTODETECT4PTS_H__
+
+#if _MSC_VER > 1000
+#pragma once
+#endif // _MSC_VER > 1000
+
+#include "cv.h"
+#include "cxcore.h"
+#include "highgui.h"
+#include <vector>
+using namespace std;
+
+class CAutoDetect4Pts  
+{
+public:
+	CAutoDetect4Pts();
+	virtual ~CAutoDetect4Pts();
+	bool SetImage(IplImage *inputImage);
+	int Detect();
+	int GetPts(CvPoint *pt);
+
+public:
+	IplImage *m_Src;
+	int m_Num;
+	CvPoint m_AutoPt[4];
+
+
+};
+
+#endif // !defined(AFX_AUTODETECT4PTS_H__F2E92C45_6412_4E9D_AFCA_9C2042788F93__INCLUDED_)
