@@ -23,10 +23,15 @@ public:
 	bool SetImage(IplImage *inputImage);
 	int Detect();
 	int GetPts(CvPoint *pt);
+	bool ConnectdCorner(IplImage *edge, CvPoint2D32f *pCorner, int &n);
+
 
 public:
 	IplImage *m_Src;
-	int m_Num;
+	IplImage *m_SrcGray;
+	IplImage *m_Edge;
+	CvPoint2D32f m_pCorner[1000];
+		int m_Num;
 	CvPoint m_AutoPt[4];
 
 
