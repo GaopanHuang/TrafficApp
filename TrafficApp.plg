@@ -3,36 +3,22 @@
 <pre>
 <h1>Build Log</h1>
 <h3>
---------------------Configuration: TrafficApp - Win32 Release--------------------
+--------------------Configuration: TrafficApp - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSP836A.tmp" with contents
+Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSP656B.tmp" with contents
 [
-/nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Release/" /Fp"Release/TrafficApp.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
-"D:\projects\TrafficApp\TrafficAppDlg.cpp"
-"D:\projects\TrafficApp\AutoDetect4Pts.cpp"
+cv.lib highgui.lib cxcore.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/TrafficApp.pdb" /debug /machine:I386 /out:"Debug/TrafficApp.exe" /pdbtype:sept 
+.\Debug\AutoDetect4Pts.obj
+.\Debug\PtsDlg.obj
+.\Debug\StdAfx.obj
+.\Debug\TrafficApp.obj
+.\Debug\TrafficAppDlg.obj
+.\Debug\TrafficApp.res
 ]
-Creating command line "cl.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSP836A.tmp" 
-Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSP836B.tmp" with contents
-[
-cv.lib highgui.lib cxcore.lib /nologo /subsystem:windows /incremental:no /pdb:"Release/TrafficApp.pdb" /machine:I386 /out:"Release/TrafficApp.exe" 
-.\Release\PtsDlg.obj
-.\Release\StdAfx.obj
-.\Release\TrafficApp.obj
-.\Release\TrafficAppDlg.obj
-.\Release\TrafficApp.res
-.\Release\AutoDetect4Pts.obj
-]
-Creating command line "link.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSP836B.tmp"
+Creating command line "link.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSP656B.tmp"
 <h3>Output Window</h3>
-Compiling...
-TrafficAppDlg.cpp
-AutoDetect4Pts.cpp
-Generating Code...
 Linking...
-Creating command line "bscmake.exe /nologo /o"Release/TrafficApp.bsc"  .\Release\StdAfx.sbr .\Release\PtsDlg.sbr .\Release\TrafficApp.sbr .\Release\TrafficAppDlg.sbr .\Release\AutoDetect4Pts.sbr"
-Creating browse info file...
-<h3>Output Window</h3>
 
 
 
