@@ -45,7 +45,6 @@ int CAutoDetect4Pts::GetPts(CvPoint *pt)
 	return i;
 }
 
-
 bool CAutoDetect4Pts::SetImage(IplImage *inputImage)
 {
 	if (inputImage == NULL)
