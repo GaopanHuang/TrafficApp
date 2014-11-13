@@ -5,8 +5,6 @@
 #include "TrafficApp.h"
 #include "TrafficAppDlg.h"
 
-#define debugfile "D:\\projects\\GitHub\\TrafficApp\\test\\1small.jpg"
-
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -202,8 +200,6 @@ BOOL CTrafficAppDlg::OnInitDialog()
 	m_Bmi.bmiHeader.biYPelsPerMeter = 0;
 	m_Bmi.bmiHeader.biClrUsed = 0;
 	m_Bmi.bmiHeader.biClrImportant = 0;
-
-	OnFileOpen();
 	
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -312,23 +308,21 @@ void CTrafficAppDlg::OnButtonSave()
 void CTrafficAppDlg::OnFileOpen() 
 {
 	// TODO: Add your command handler code here
- 	CString FilePath;
-// 	CFileDialog dlg(TRUE, "*.jpg, *.bmp, *.tif", NULL, NULL, "图片文件(*.jpg, *.bmp, *.tif)|*.jpg|*.bmp|*.tif||");
-// 	
-// 	dlg.m_ofn.lpstrTitle =_T("打开文件");
-// 	
-// 	if(dlg.DoModal() == IDOK)	FilePath=dlg.GetPathName();	
-// 	else	return;
-// 	
-// 	if(m_InputImg!=NULL)
-// 	{
-// 		cvReleaseImage(&m_InputImg);
-// 		m_InputImg=NULL;
-// 	}
-// 		
-
-	FilePath.Format("%s", debugfile);
-	m_InputImg=cvLoadImage(FilePath);
+	CString FilePath;
+	CFileDialog dlg(TRUE, "*.jpg, *.bmp, *.tif", NULL, NULL, "图片文件(*.jpg, *.bmp, *.tif)|*.jpg|*.bmp|*.tif||");
+	
+	dlg.m_ofn.lpstrTitle =_T("打开文件");
+	
+	if(dlg.DoModal() == IDOK)	FilePath=dlg.GetPathName();	
+	else	return;
+	
+	if(m_InputImg!=NULL)
+	{
+		cvReleaseImage(&m_InputImg);
+		m_InputImg=NULL;
+	}
+		
+	m_InputImg=cvLoadImage(FilePath);	
 	if(!m_InputImg)
 	{
 		MessageBox("无法打开图片！");
