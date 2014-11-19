@@ -6,13 +6,13 @@
 --------------------Configuration: TrafficApp - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSPA872.tmp" with contents
+Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSP8609.tmp" with contents
 [
 /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/TrafficApp.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
-"D:\projects\GitHub\TrafficApp\TrafficAppDlg.cpp"
+"D:\projects\GitHub\TrafficApp\AutoDetect4Pts.cpp"
 ]
-Creating command line "cl.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSPA872.tmp" 
-Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSPA873.tmp" with contents
+Creating command line "cl.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSP8609.tmp" 
+Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSP8619.tmp" with contents
 [
 cv.lib highgui.lib cxcore.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/TrafficApp.pdb" /debug /machine:I386 /out:"Debug/TrafficApp.exe" /pdbtype:sept 
 .\Debug\AutoDetect4Pts.obj
@@ -22,10 +22,10 @@ cv.lib highgui.lib cxcore.lib /nologo /subsystem:windows /incremental:yes /pdb:"
 .\Debug\TrafficAppDlg.obj
 .\Debug\TrafficApp.res
 ]
-Creating command line "link.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSPA873.tmp"
+Creating command line "link.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSP8619.tmp"
 <h3>Output Window</h3>
 Compiling...
-TrafficAppDlg.cpp
+AutoDetect4Pts.cpp
 Linking...
 Creating command line "bscmake.exe /nologo /o"Debug/TrafficApp.bsc"  .\Debug\StdAfx.sbr .\Debug\AutoDetect4Pts.sbr .\Debug\PtsDlg.sbr .\Debug\TrafficApp.sbr .\Debug\TrafficAppDlg.sbr"
 Creating browse info file...

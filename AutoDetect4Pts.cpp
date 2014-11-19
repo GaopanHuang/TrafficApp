@@ -40,13 +40,14 @@ CAutoDetect4Pts::~CAutoDetect4Pts()
 		cvReleaseImage(&m_Edge);
 		m_Edge=NULL;
 	}
+	cvDestroyAllWindows();
 }
 int CAutoDetect4Pts::Detect()
 {
 	if (m_SrcGray == NULL)
 		return 0;
-	cvNamedWindow("src");
-	cvNamedWindow("edge");
+// 	cvNamedWindow("src");
+// 	cvNamedWindow("edge");
 
 	cvZero(m_Edge);
 	cvCanny(m_SrcGray, m_Edge, 230, 250);
@@ -60,28 +61,87 @@ int CAutoDetect4Pts::Detect()
 	int numcorners = 500;
 	cvGoodFeaturesToTrack(m_SrcGray,eig_image,temp_image, m_pCorner, &numcorners, 0.1, 50);
 
-	ConnectdCorner(m_Edge, m_pCorner, numcorners);
 
-	for (int i = 0; i < numcorners; i ++)
+	m_Num = 0;
+	if (ConnectdCorner(m_Edge, m_pCorner, numcorners))
 	{
-		if (m_Edge->imageData[int(m_pCorner[i].y)* m_Edge->widthStep + int(m_pCorner[i]. x)] != 0 )
+		m_Num = numcorners;
+		double len = 0, max_len = 0;
+		int flag[4] = {0,1,2,3};
+		int i, j;
+		for (i = 0; i < numcorners; i ++)
 		{
-			cvFloodFill(m_Edge, cvPoint(m_pCorner[i].x, m_pCorner[i].y), cvScalar(125,125,125));
-			cvCircle(m_Src, cvPoint(m_pCorner[i].x, m_pCorner[i].y), 3, cvScalar(0, 0, 255));
+			for (j = i+1; j < numcorners; j ++)
+			{
+				len = (m_pCorner[i].x-m_pCorner[j].x)*(m_pCorner[i].x-m_pCorner[j].x) +
+					(m_pCorner[i].y-m_pCorner[j].y)*(m_pCorner[i].y-m_pCorner[j].y);
+				if (len > max_len)
+				{
+					flag[0] = i;
+					flag[2] = j;
+					max_len = len;
+ 				}
+			}
+		}
+
+		switch (flag[0])
+		{
+		case 0:
+			switch (flag[2])
+			{
+			case 1:
+				flag[1] = 2; flag[3] = 3;
+				break;
+			case 2:
+				flag[1] = 1; flag[3] = 3;
+				break;
+			case 3:
+				flag[1] = 1; flag[3] = 2;
+				break;				
+			}
+			break;
+		case 1:
+			switch (flag[2])
+			{
+			case 2:
+				flag[1] = 0; flag[3] = 3;
+				break;
+			case 3:
+				flag[1] = 0; flag[3] = 2;
+				break;
+			}
+			break;
+		case 2:
+			switch (flag[2])
+			{
+			case 3:
+				flag[1] = 0; flag[3] = 1;
+				break;
+			}
+			break;
+		}
+
+		for (i = 0; i < m_Num; i ++)
+		{
+			m_AutoPt[i] = cvPoint((int)m_pCorner[flag[i]].x, (int)m_pCorner[flag[i]].y);
 		}
 	}
 
-	cvShowImage("edge", m_Edge);
-	cvShowImage("src", m_Src);
-	cvSaveImage("d:\\edge.jpg",m_Edge);
-	cvWaitKey(0);
-	cvDestroyAllWindows();
-
-	int num = 0;
-
+// 	for (int i = 0; i < numcorners; i ++)
+// 	{
+// 		if (m_Edge->imageData[int(m_pCorner[i].y)* m_Edge->widthStep + int(m_pCorner[i]. x)] != 0 )
+// 		{
+// 			cvCircle(m_Src, cvPoint(m_pCorner[i].x, m_pCorner[i].y), 3, cvScalar(0, 0, 255));
+// 		}
+// 	}
+// 	cvShowImage("edge", m_Edge);
+// 	cvShowImage("src", m_Src);
+// 	cvWaitKey(0);
+// 	
 	cvReleaseImage(&eig_image);
 	cvReleaseImage(&temp_image);
-	return num;
+
+	return m_Num;
 }
 
 bool CAutoDetect4Pts::ConnectdCorner(IplImage *edge, CvPoint2D32f *pCorner, int &n)

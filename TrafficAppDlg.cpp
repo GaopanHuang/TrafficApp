@@ -410,7 +410,7 @@ void CTrafficAppDlg::init(CString filename)
 			temp.yi = m_AutoPtimage[2].y;
 			temp.i = 1;
 			temp.xs = LengthCalibrationBlock+100;
-			temp.ys = 100;
+			temp.ys = LengthCalibrationBlock+100;
 			temp.s = 1;
 			m_ptsCalibrate.push_back(temp);
 
@@ -418,7 +418,7 @@ void CTrafficAppDlg::init(CString filename)
 			temp.yi = m_AutoPtimage[3].y;
 			temp.i = 1;
 			temp.xs = LengthCalibrationBlock+100;
-			temp.ys = LengthCalibrationBlock+100;
+			temp.ys = 100;
 			temp.s = 1;
 			m_ptsCalibrate.push_back(temp);
 
@@ -431,13 +431,15 @@ void CTrafficAppDlg::init(CString filename)
 			
 			m_IsCalibration = TRUE;
 		}
-
-		//如果不存在标定文件，则提示需要初始化
-		GetDlgItem(IDC_EDIT_TIPS)->SetWindowText("该图片未能自动标定，请手动标定。先对应坐标\r\n完成初始化，再测量距离！");
-		GetDlgItem(IDC_BUTTON_INIT)->EnableWindow(TRUE);
-		GetDlgItem(IDC_BUTTON_INIT)->SetWindowText("坐标对应后，点击开始初始化");
-
-		m_IsCalibration = FALSE;
+		else
+		{
+			//如果不存在标定文件，则提示需要初始化
+			GetDlgItem(IDC_EDIT_TIPS)->SetWindowText("该图片未能自动标定，请手动标定。先对应坐标\r\n完成初始化，再测量距离！");
+			GetDlgItem(IDC_BUTTON_INIT)->EnableWindow(TRUE);
+			GetDlgItem(IDC_BUTTON_INIT)->SetWindowText("坐标对应后，点击开始初始化");
+			
+			m_IsCalibration = FALSE;
+		}
 	}
 
 	if(m_DstImg!=NULL)
@@ -680,7 +682,7 @@ void CTrafficAppDlg::OnLButtonUp(UINT nFlags, CPoint point)
 			
 			cvCopy(m_DstImg, m_CurImg);
 			CString text;
-			text.Format("%.3lfm", m_CurveLength);
+			text.Format("%.3lfcm", m_CurveLength);
 			cvLine(m_CurImg, m_PtDownOri, m_PtUpOri, cvScalar(0, 255, 0));
 			cvPutText( m_CurImg, text.GetBuffer(0), m_PtUpOri, &m_Font, cvScalar(255, 0 ,0));
 			ShowImg(m_CurImg, m_CurImg->width, m_CurImg->height);

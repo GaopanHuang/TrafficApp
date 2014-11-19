@@ -31,7 +31,7 @@ public:
 	IplImage *m_SrcGray;
 	IplImage *m_Edge;
 	CvPoint2D32f m_pCorner[1000];
-		int m_Num;
+	int m_Num;
 	CvPoint m_AutoPt[4];
 
 
